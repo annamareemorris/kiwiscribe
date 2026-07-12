@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KiwiScribe — A home for New Zealand books</title>
+<meta name="description" content="Discover thousands of New Zealand titles, follow the awards, explore Māori and Pasifika voices — and buy from local Kiwi bookshops. Free on the App Store.">
+<meta name="theme-color" content="#0A0A0C">
+
+<!-- Open Graph / social share.
+     Drop a share image at og-image.png (a screenshot or a clean export of the splash, 1200×630). -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="KiwiScribe — A home for New Zealand books">
+<meta property="og:description" content="A home for New Zealand books. Discover Kiwi titles, follow the awards, explore Māori and Pasifika voices — and buy local.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:locale" content="en_NZ">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon: inline NZ mark. Swap for the app icon later if you like. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237A2E96'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='32' font-weight='800' fill='%23ffffff' text-anchor='middle'%3ENZ%3C/text%3E%3C/svg%3E">
+
+<style>
+  :root{
+    --bg:#0A0A0C;
+    --bg-2:#141418;
+    --surface:rgba(255,255,255,.035);
+    --surface-2:rgba(255,255,255,.06);
+    --border:rgba(255,255,255,.09);
+    --border-strong:rgba(198,169,236,.28);
+    --accent:#8A4FCE;
+    --g1:#7A2E96;
+    --g2:#B4308F;
+    --lav:#C6A9EC;
+    --text:#FFFFFF;
+    --muted:#B9B9C2;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,ui-serif,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--text);
+    background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);
+    background-attachment:fixed;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  :focus-visible{
+    outline:2px solid var(--lav);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--lav);
+    font-weight:600;
+    margin:0 0 14px;
+  }
+
+  h2.section-title{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);
+    line-height:1.1;
+    letter-spacing:-.01em;
+    margin:0 0 .5em;
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.nav.scrolled{
+    background:rgba(10,10,12,.72);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .nav-brand{font-weight:700;letter-spacing:.04em;font-size:1.05rem}
+  .nav-brand b{color:var(--lav);font-weight:700}
+  .nav-links{display:flex;align-items:center;gap:28px;list-style:none;margin:0;padding:0}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:.92rem;transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .btn{
+    display:inline-block;
+    font-family:var(--sans);
+    font-weight:600;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    border-radius:999px;
+    transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(120deg,var(--g1),var(--g2));
+    color:#fff;
+    padding:11px 22px;
+    font-size:.92rem;
+    box-shadow:0 6px 24px -8px rgba(180,48,143,.6);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(180,48,143,.7)}
+  .nav-links .btn-primary{padding:9px 20px}
+  @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+  .nav-toggle-hint{display:none}
+  @media (max-width:720px){
+    .nav-links li.hide-sm{display:none}
+    .nav-links{gap:16px}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;overflow:hidden;text-align:center;padding:clamp(56px,11vw,120px) 0 clamp(60px,10vw,104px)}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(ellipse 62% 52% at 50% 42%,
+      rgba(138,79,206,.5) 0%,
+      rgba(122,46,150,.24) 38%,
+      rgba(10,10,12,0) 72%);
+  }
+  .hero .wrap{position:relative;z-index:1}
+
+  /* The splash lockup, rebuilt */
+  .lockup{display:inline-block;margin:0 auto 40px;animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  .mark-brand{font-weight:600;letter-spacing:.12em;color:var(--lav);font-size:clamp(1.15rem,3.4vw,1.55rem);margin:0}
+  .mark-nz{font-weight:800;color:#fff;font-size:clamp(4.6rem,20vw,10rem);line-height:.86;letter-spacing:-.03em;margin:.06em 0 0;text-shadow:0 4px 60px rgba(198,169,236,.35)}
+  .mark-rule{height:1px;width:min(58vw,320px);margin:.5em auto .55em;background:linear-gradient(90deg,transparent,rgba(220,204,236,.6),transparent)}
+  .mark-books{font-weight:300;letter-spacing:.5em;color:#DCCFEC;font-size:clamp(1.15rem,3.6vw,1.65rem);margin:0;text-indent:.5em}
+
+  .hero h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(2rem,5.6vw,3.4rem);
+    line-height:1.08;
+    letter-spacing:-.015em;
+    margin:0 auto .5em;
+    max-width:16ch;
+    animation:rise .9s .08s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .hero p.lede{
+    color:var(--muted);
+    font-size:clamp(1.02rem,2.1vw,1.18rem);
+    max-width:52ch;margin:0 auto 34px;
+    animation:rise .9s .16s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .hero p.lede strong{color:var(--text);font-weight:600}
+  .hero-cta{display:flex;flex-direction:column;align-items:center;gap:16px;animation:rise .9s .24s cubic-bezier(.2,.7,.2,1) both}
+  .btn-store{padding:15px 30px;font-size:1rem}
+  .fineprint{color:var(--muted);font-size:.9rem;font-style:italic;letter-spacing:.01em}
+
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .lockup,.hero h1,.hero p.lede,.hero-cta{animation:none}
+  }
+
+  /* ---------- Section rhythm ---------- */
+  section{padding:clamp(56px,9vw,96px) 0}
+  .divider-top{border-top:1px solid var(--border)}
+
+  /* ---------- Intro strip ---------- */
+  .intro{text-align:center}
+  .intro .wrap{max-width:800px}
+  .intro p{color:var(--muted);font-size:clamp(1.05rem,2.2vw,1.22rem);margin:.2em 0 0}
+
+  /* ---------- Features ---------- */
+  .features .wrap{max-width:var(--maxw)}
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:26px 24px;
+    transition:transform .25s ease,border-color .25s ease,background .25s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--border-strong);background:var(--surface-2)}
+  @media (prefers-reduced-motion:reduce){.card:hover{transform:none}}
+  .card .ico{
+    width:44px;height:44px;border-radius:12px;
+    display:grid;place-items:center;margin-bottom:16px;
+    background:linear-gradient(135deg,rgba(122,46,150,.5),rgba(180,48,143,.4));
+    border:1px solid var(--border-strong);
+  }
+  .card .ico svg{width:22px;height:22px;stroke:#EBD9FF;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{font-family:var(--serif);font-weight:600;font-size:1.22rem;margin:0 0 6px;letter-spacing:-.005em}
+  .card p{color:var(--muted);font-size:.96rem;margin:0}
+
+  /* ---------- Collections ---------- */
+  .collections{text-align:center;position:relative;overflow:hidden}
+  .collections::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(138,79,206,.16),transparent 68%);
+  }
+  .collections .wrap{position:relative;z-index:1;max-width:960px}
+  .chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
+  .chip{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:10px 18px;
+    font-size:.94rem;
+    color:#E8E4F0;
+    transition:border-color .2s,background .2s;
+  }
+  .chip:hover{border-color:var(--border-strong);background:var(--surface-2)}
+  .chip .em{margin-right:8px}
+
+  /* ---------- Screenshots ---------- */
+  .shots-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 0 12px}
+  .shots-wrap::-webkit-scrollbar{display:none}
+  .shots{display:flex;gap:22px;justify-content:center;min-width:min-content;padding:0 24px}
+  .device{
+    flex:0 0 auto;width:230px;aspect-ratio:9/19.5;
+    border-radius:34px;padding:9px;
+    background:linear-gradient(160deg,#26262d,#121216);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 24px 60px -24px rgba(0,0,0,.8),0 0 0 1px rgba(198,169,236,.06);
+    position:relative;
+  }
+  .device .screen{width:100%;height:100%;border-radius:26px;overflow:hidden;background:#0d0d10;position:relative}
+  .device .screen img{width:100%;height:100%;object-fit:cover}
+  /* Placeholder shown until real screenshots are added */
+  .device .screen.missing img{display:none}
+  .device .screen.missing::after{
+    content:attr(data-label);
+    position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+    padding:20px;color:var(--muted);font-size:.82rem;letter-spacing:.02em;
+    background:radial-gradient(ellipse at 50% 40%,rgba(138,79,206,.28),rgba(13,13,16,1) 72%);
+  }
+  @media (max-width:560px){.device{width:200px}}
+
+  /* ---------- For Authors ---------- */
+  .authors .wrap{max-width:var(--maxw)}
+  .authors .intro-copy{max-width:720px;margin-bottom:34px}
+  .authors .intro-copy p{color:var(--muted);font-size:1.05rem}
+  .authors .inbox{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--surface);border:1px solid var(--border-strong);
+    border-radius:999px;padding:10px 20px;margin-top:6px;
+    font-weight:600;text-decoration:none;color:#EEE6FB;
+  }
+  .authors .inbox:hover{background:var(--surface-2)}
+  .author-grid{display:grid;gap:18px;grid-template-columns:repeat(2,1fr);margin-top:8px}
+  @media (max-width:720px){.author-grid{grid-template-columns:1fr}}
+  .author-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:18px;padding:28px 26px;display:flex;flex-direction:column;
+  }
+  .author-card .num{font-family:var(--serif);color:var(--lav);font-size:.95rem;font-weight:600;letter-spacing:.04em;margin-bottom:10px}
+  .author-card h3{font-family:var(--serif);font-weight:600;font-size:1.28rem;margin:0 0 10px}
+  .author-card p{color:var(--muted);font-size:.98rem;margin:0 0 22px;flex:1}
+  .author-card .btn-outline{
+    align-self:flex-start;
+    background:transparent;color:#EEE6FB;
+    border:1px solid var(--border-strong);
+    padding:11px 20px;font-size:.92rem;font-weight:600;text-decoration:none;
+    border-radius:999px;transition:background .2s,transform .2s,border-color .2s;
+  }
+  .author-card .btn-outline:hover{background:linear-gradient(120deg,var(--g1),var(--g2));border-color:transparent;transform:translateY(-2px)}
+  @media (prefers-reduced-motion:reduce){.author-card .btn-outline:hover{transform:none}}
+  .authors .smallprint{margin-top:26px;color:var(--muted);font-size:.88rem;font-style:italic;max-width:620px}
+
+  /* ---------- Closing CTA ---------- */
+  .closing{text-align:center;position:relative;overflow:hidden}
+  .closing::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(ellipse 60% 70% at 50% 60%,rgba(138,79,206,.24),transparent 70%);
+  }
+  .closing .wrap{position:relative;z-index:1}
+  .closing p{color:var(--muted);font-size:1.1rem;margin:0 0 28px}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--border);padding:44px 0;color:var(--muted);font-size:.9rem}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between}
+  footer a{color:var(--muted);text-decoration:none;transition:color .2s}
+  footer a:hover{color:var(--text)}
+  footer .foot-links{display:flex;gap:22px;flex-wrap:wrap}
+  footer .copy{width:100%;color:#8A8A94;font-size:.82rem;border-top:1px solid var(--border);margin-top:8px;padding-top:20px}
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="#top" aria-label="KiwiScribe home"><b>Kiwi</b>Scribe</a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li class="hide-sm"><a href="#features">Features</a></li>
+        <li class="hide-sm"><a href="#collections">Collections</a></li>
+        <li class="hide-sm"><a href="#for-authors">For Authors</a></li>
+        <li class="hide-sm"><a href="/privacy">Privacy</a></li>
+        <!-- INSERT APP STORE URL -->
+        <li><a class="btn btn-primary" href="#">Download</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="lockup" aria-hidden="true">
+        <p class="mark-brand">KiwiScribe</p>
+        <p class="mark-nz">NZ</p>
+        <div class="mark-rule"></div>
+        <p class="mark-books">Books</p>
+      </div>
+      <p class="eyebrow">KiwiScribe — NZ Books</p>
+      <h1 id="hero-title">A home for New Zealand books.</h1>
+      <p class="lede">Discover thousands of Kiwi titles, follow the awards, explore Māori and Pasifika voices — and buy from local NZ bookshops. <strong>Free on the App Store.</strong></p>
+      <div class="hero-cta">
+        <!-- INSERT APP STORE URL -->
+        <a class="btn btn-primary btn-store" href="#">Download on the App Store</a>
+        <span class="fineprint">Free. No account. No ads. No tracking.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTRO STRIP ============ -->
+  <section class="intro divider-top" aria-labelledby="intro-title">
+    <div class="wrap reveal">
+      <p class="eyebrow">Made in Aotearoa</p>
+      <h2 class="section-title" id="intro-title">Made in Aotearoa, for readers of Aotearoa.</h2>
+      <p>KiwiScribe brings New Zealand's books together in one beautiful place — from the literary canon to this year's Ockham winners — and helps you buy them from independent Kiwi booksellers rather than overseas giants.</p>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="features divider-top" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <p class="eyebrow reveal">What's inside</p>
+      <h2 class="section-title reveal" id="features-title">Everything a Kiwi reader needs.</h2>
+      <div class="grid" style="margin-top:34px">
+
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h10M4 10h16M4 15h12M4 20h7"/></svg></div>
+          <h3>Discover by collection</h3>
+          <p>Curated shelves: Award Winners, Māori Voices, Pasifika Writing, NZ Poetry, Classics, Crime, and more.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+          <h3>Search everything</h3>
+          <p>Find any title by name, author, or ISBN.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h13l-1.4 9.2a2 2 0 0 1-2 1.7H8.2a2 2 0 0 1-2-1.7L4.5 4H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="16" cy="20" r="1.4"/></svg></div>
+          <h3>Buy local</h3>
+          <p>Jump straight to a New Zealand bookshop to purchase — supporting independent booksellers.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a7 7 0 0 1 14 0c0 5.6-7 10-7 10Z"/><circle cx="12" cy="11" r="2.4"/></svg></div>
+          <h3>Explore the scene</h3>
+          <p>Browse NZ bookshops, publishers, literary journals, and festivals.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 4h9a3 3 0 0 1 3 3v13l-6-3-6 3V4Z"/></svg></div>
+          <h3>Your reading shelf</h3>
+          <p>Build a reading list and keep track of what you love.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg></div>
+          <h3>Private by design</h3>
+          <p>No account, no ads, no tracking. Your data stays on your device.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLLECTIONS ============ -->
+  <section class="collections divider-top" id="collections" aria-labelledby="collections-title">
+    <div class="wrap">
+      <p class="eyebrow reveal">Curated shelves</p>
+      <h2 class="section-title reveal" id="collections-title">Curated for Aotearoa.</h2>
+      <div class="chips reveal" style="margin-top:26px">
+        <span class="chip"><span class="em">🏆</span>Award Winners</span>
+        <span class="chip"><span class="em">🌿</span>Māori Voices</span>
+        <span class="chip"><span class="em">🌊</span>Pasifika Writing</span>
+        <span class="chip"><span class="em">📚</span>NZ Classics</span>
+        <span class="chip"><span class="em">✍️</span>New Zealand Poetry</span>
+        <span class="chip"><span class="em">🔍</span>Aotearoa Crime</span>
+        <span class="chip"><span class="em">📜</span>Historical Fiction</span>
+        <span class="chip"><span class="em">📖</span>Short Stories</span>
+        <span class="chip"><span class="em">🌀</span>Speculative Aotearoa</span>
+        <span class="chip"><span class="em">🌟</span>Young Adult</span>
+        <span class="chip"><span class="em">🧸</span>Picture &amp; Children's Books</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENSHOTS ============
+       Add your phone screenshots to a  screenshots/  folder in the repo:
+       01-home.png  02-collections.png  03-book-detail.png  04-author.png  05-bookshops.png
+       They'll appear automatically; until then a labelled placeholder shows. -->
+  <section class="shots divider-top" aria-labelledby="shots-title">
+    <div class="wrap">
+      <p class="eyebrow reveal" style="text-align:center">A closer look</p>
+      <h2 class="section-title reveal" id="shots-title" style="text-align:center">See it in your hand.</h2>
+    </div>
+    <div class="shots-wrap" style="margin-top:30px">
+      <div class="shots">
+        <figure class="device" style="margin:0"><div class="screen" data-label="01-home.png"><img src="screenshots/01-home.png" alt="KiwiScribe home screen"></div></figure>
+        <figure class="device" style="margin:0"><div class="screen" data-label="02-collections.png"><img src="screenshots/02-collections.png" alt="Browsing curated collections in KiwiScribe"></div></figure>
+        <figure class="device" style="margin:0"><div class="screen" data-label="03-book-detail.png"><img src="screenshots/03-book-detail.png" alt="A book detail page in KiwiScribe"></div></figure>
+        <figure class="device" style="margin:0"><div class="screen" data-label="04-author.png"><img src="screenshots/04-author.png" alt="An author profile in KiwiScribe"></div></figure>
+        <figure class="device" style="margin:0"><div class="screen" data-label="05-bookshops.png"><img src="screenshots/05-bookshops.png" alt="New Zealand bookshops listed in KiwiScribe"></div></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOR AUTHORS ============ -->
+  <section class="authors divider-top" id="for-authors" aria-labelledby="authors-title">
+    <div class="wrap">
+      <p class="eyebrow reveal">⭐ For New Zealand Authors &amp; the Literary Community</p>
+      <h2 class="section-title reveal" id="authors-title">KiwiScribe is built to celebrate New Zealand writers — and we'd love your help making it better.</h2>
+      <div class="intro-copy reveal">
+        <p>We warmly invite New Zealand authors, publishers, festival organisers and readers to contribute. Everything below goes to one inbox:</p>
+        <a class="inbox" href="mailto:annamareemorris@gmail.com">📮 annamareemorris@gmail.com</a>
+      </div>
+
+      <div class="author-grid">
+
+        <article class="author-card reveal">
+          <div class="num">Authors</div>
+          <h3>Add or approve your photo</h3>
+          <p>Are you a New Zealand author? We'd love to feature your portrait alongside your work. Send us a photo you own the rights to, along with your written permission to display it in the app.</p>
+          <a class="btn-outline" href="mailto:annamareemorris@gmail.com?subject=Author%20photo%20%26%20permission%20-%20[Your%20Name]&body=Name%3A%0AI%20confirm%20I%20own%20or%20have%20permission%20to%20use%20the%20attached%20photo%2C%20and%20I%20give%20KiwiScribe%20permission%20to%20display%20it%20in%20the%20app.%0A(Please%20attach%20your%20photo.)">Send my photo &amp; permission</a>
+        </article>
+
+        <article class="author-card reveal">
+          <div class="num">Catalogue</div>
+          <h3>Submit a book or correction</h3>
+          <p>Missing a New Zealand title? Spotted a wrong detail or cover? Let us know — we're always improving the catalogue.</p>
+          <a class="btn-outline" href="mailto:annamareemorris@gmail.com?subject=Book%20submission%20or%20correction">Submit a book / correction</a>
+        </article>
+
+        <article class="author-card reveal">
+          <div class="num">Events</div>
+          <h3>Submit a festival or event</h3>
+          <p>Running a New Zealand book festival or literary event? Send us the details and we'll add it.</p>
+          <a class="btn-outline" href="mailto:annamareemorris@gmail.com?subject=Festival%20or%20event%20submission">Submit a festival</a>
+        </article>
+
+        <article class="author-card reveal">
+          <div class="num">Listings</div>
+          <h3>Bookshops, publishers &amp; journals</h3>
+          <p>Are you an independent NZ bookshop, publisher, or literary journal that should be listed? Get in touch.</p>
+          <a class="btn-outline" href="mailto:annamareemorris@gmail.com?subject=Bookshop%2Fpublisher%2Fjournal%20listing">Get listed</a>
+        </article>
+
+      </div>
+
+      <p class="smallprint">We only use photos and materials you give us permission to use, and we'll happily remove anything on request.</p>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING CTA ============ -->
+  <section class="closing divider-top" aria-labelledby="closing-title">
+    <div class="wrap reveal">
+      <p class="eyebrow">Read New Zealand</p>
+      <h2 class="section-title" id="closing-title">Read New Zealand. Support local.</h2>
+      <p>Download KiwiScribe free and discover your next great Kiwi read.</p>
+      <!-- INSERT APP STORE URL -->
+      <a class="btn btn-primary btn-store" href="#">Download on the App Store</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div>KiwiScribe — NZ Books · Made in Aotearoa New Zealand 🇳🇿</div>
+    <div class="foot-links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="mailto:annamareemorris@gmail.com">Contact</a>
+    </div>
+    <div class="copy">© <span id="year">2026</span> KiwiScribe. Book data from the National Library of New Zealand. Not affiliated with any bookshop or publisher.</div>
+  </div>
+</footer>
+
+<script>
+  // Nav background on scroll
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 12); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Screenshot placeholders: if an image fails to load, show the labelled frame
+  document.querySelectorAll('.device .screen').forEach(function(screen){
+    var img = screen.querySelector('img');
+    if(!img) return;
+    var fail = function(){ screen.classList.add('missing'); };
+    img.addEventListener('error', fail);
+    if(img.complete && img.naturalWidth === 0) fail();
+  });
+
+  // Scroll reveal (respects reduced motion)
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
