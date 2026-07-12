@@ -1,0 +1,264 @@
+[privacy.html](https://github.com/user-attachments/files/29936639/privacy.html)
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KiwiScribe — Privacy Policy</title>
+<meta name="description" content="KiwiScribe collects no personal data, has no tracking, no ads, and no account. Anything you save stays on your device.">
+<meta name="theme-color" content="#0A0A0C">
+<link rel="canonical" href="https://kiwiscribe.co.nz/privacy.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="KiwiScribe — Privacy Policy">
+<meta property="og:description" content="No data collection, no tracking, no ads, no account. Your data stays on your device.">
+<meta property="og:url" content="https://kiwiscribe.co.nz/privacy.html">
+<meta property="og:locale" content="en_NZ">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237A2E96'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='32' font-weight='800' fill='%23ffffff' text-anchor='middle'%3ENZ%3C/text%3E%3C/svg%3E">
+
+<style>
+  :root{
+    --bg:#0A0A0C;
+    --bg-2:#141418;
+    --surface:rgba(255,255,255,.035);
+    --surface-2:rgba(255,255,255,.06);
+    --border:rgba(255,255,255,.09);
+    --border-strong:rgba(198,169,236,.28);
+    --accent:#8A4FCE;
+    --g1:#7A2E96;
+    --g2:#B4308F;
+    --lav:#C6A9EC;
+    --text:#FFFFFF;
+    --muted:#B9B9C2;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,ui-serif,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1120px;
+    --readw:720px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--text);
+    background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);
+    background-attachment:fixed;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  a{color:var(--lav);text-decoration:none;transition:color .2s}
+  a:hover{color:#E4D3FB}
+
+  :focus-visible{outline:2px solid var(--lav);outline-offset:3px;border-radius:6px}
+
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .read{max-width:var(--readw);margin:0 auto;padding:0 24px}
+
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--lav);font-weight:600;margin:0 0 14px;
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.nav.scrolled{
+    background:rgba(10,10,12,.72);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .nav-brand{font-weight:700;letter-spacing:.04em;font-size:1.05rem;color:var(--text)}
+  .nav-brand b{color:var(--lav)}
+  .nav-links{display:flex;align-items:center;gap:26px;list-style:none;margin:0;padding:0}
+  .nav-links a{color:var(--muted);font-size:.92rem}
+  .nav-links a:hover{color:var(--text)}
+  .btn{
+    display:inline-block;font-family:var(--sans);font-weight:600;text-decoration:none;
+    border:none;cursor:pointer;border-radius:999px;
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;
+    padding:9px 20px;font-size:.92rem;
+    box-shadow:0 6px 24px -8px rgba(180,48,143,.6);
+  }
+  .btn-primary:hover{transform:translateY(-2px)}
+  @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+  @media (max-width:560px){.nav-links a.hide-sm{display:none}}
+
+  /* ---------- Header ---------- */
+  .doc-head{position:relative;overflow:hidden;padding:clamp(48px,9vw,86px) 0 clamp(30px,5vw,48px);text-align:center}
+  .doc-head::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(ellipse 62% 60% at 50% 30%,rgba(138,79,206,.34),rgba(10,10,12,0) 68%);
+  }
+  .doc-head .read{position:relative;z-index:1}
+  .doc-head h1{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(2.2rem,6vw,3.4rem);line-height:1.05;letter-spacing:-.015em;margin:0;
+  }
+  .updated{
+    display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+    background:var(--surface);border:1px solid var(--border-strong);
+    border-radius:999px;padding:7px 16px;font-size:.85rem;color:#E8E4F0;
+  }
+  .updated .dot{width:7px;height:7px;border-radius:50%;background:var(--g2);box-shadow:0 0 10px 1px rgba(180,48,143,.8)}
+  .app-line{color:var(--muted);font-size:.95rem;margin:18px 0 0}
+  .app-line b{color:var(--text)}
+
+  /* ---------- Body ---------- */
+  main{padding-bottom:clamp(56px,9vw,96px)}
+  .lead{color:var(--muted);font-size:1.12rem;margin:8px 0 6px}
+
+  .doc h2{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(1.35rem,3.2vw,1.7rem);letter-spacing:-.005em;
+    margin:2.4em 0 .6em;padding-top:1.2em;border-top:1px solid var(--border);
+  }
+  .doc h2:first-of-type{border-top:none;padding-top:0;margin-top:1.4em}
+  .doc p{color:#D7D7DE;margin:0 0 1em}
+  .doc ul,.doc ol{color:#D7D7DE;margin:0 0 1em;padding-left:1.3em}
+  .doc li{margin:0 0 .55em}
+  .doc strong{color:var(--text);font-weight:600}
+  .doc a{color:var(--lav)}
+
+  /* Short-version callout */
+  .callout{
+    background:var(--surface);border:1px solid var(--border-strong);border-radius:18px;
+    padding:26px 28px;margin:.4em 0 1.4em;
+    position:relative;overflow:hidden;
+  }
+  .callout::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 80% 120% at 0% 0%,rgba(138,79,206,.14),transparent 60%);
+  }
+  .callout h2{border:none;padding:0;margin:0 0 .7em;font-size:1.25rem}
+  .callout ul{list-style:none;padding:0;margin:0;position:relative}
+  .callout li{display:flex;gap:12px;align-items:flex-start;margin:0 0 .7em;color:#E4E2EC}
+  .callout li:last-child{margin-bottom:0}
+  .callout .tick{
+    flex:0 0 auto;width:22px;height:22px;border-radius:50%;margin-top:1px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,rgba(122,46,150,.55),rgba(180,48,143,.5));
+    border:1px solid var(--border-strong);
+  }
+  .callout .tick svg{width:12px;height:12px;stroke:#F0E6FF;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+  .contact-box{
+    background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    padding:20px 24px;margin-top:.4em;
+  }
+  .contact-box p{margin:0}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--border);padding:44px 0;color:var(--muted);font-size:.9rem}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between}
+  footer a{color:var(--muted)}
+  footer a:hover{color:var(--text)}
+  footer .foot-links{display:flex;gap:22px;flex-wrap:wrap}
+  footer .copy{width:100%;color:#8A8A94;font-size:.82rem;border-top:1px solid var(--border);margin-top:8px;padding-top:20px}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="/" aria-label="KiwiScribe home"><b>Kiwi</b>Scribe</a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a class="hide-sm" href="/#features">Features</a></li>
+        <li><a href="/">Home</a></li>
+        <!-- INSERT APP STORE URL -->
+        <li><a class="btn btn-primary" href="#">Download</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HEADER ============ -->
+<div class="doc-head">
+  <div class="read">
+    <p class="eyebrow">KiwiScribe — NZ Books</p>
+    <h1>Privacy Policy</h1>
+    <div class="updated"><span class="dot" aria-hidden="true"></span>Last updated: 11 July 2026</div>
+    <p class="app-line"><b>App:</b> KiwiScribe – NZ Books</p>
+  </div>
+</div>
+
+<!-- ============ BODY ============ -->
+<main>
+  <article class="doc read">
+
+    <p class="lead">KiwiScribe is a catalogue of New Zealand books. Your privacy matters, and the app is built to need as little of your information as possible.</p>
+
+    <div class="callout">
+      <h2>The short version</h2>
+      <ul>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>We do not collect any personal information.</strong></span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>We do not track you</strong>, and there are no advertising or analytics identifiers.</span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>There is no account or login.</strong></span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span><span>Anything you save in the app (such as your reading list) stays <strong>on your device</strong>.</span></li>
+      </ul>
+    </div>
+
+    <h2>Information stored on your device</h2>
+    <p>KiwiScribe stores your app data — such as books you add to your list, reading status, and app settings — <strong>locally on your device</strong> only. This information is not sent to us or to anyone else, and we cannot see it.</p>
+
+    <h2>Network connections</h2>
+    <p>KiwiScribe connects to the internet only in two limited ways:</p>
+    <ol>
+      <li><strong>Book cover images</strong> are loaded from public book-data services (such as Google Books and Open Library) so covers can be shown.</li>
+      <li><strong>Bookshop links</strong> — when you choose to find or buy a book, the app opens a New Zealand bookshop's website in an in-app browser.</li>
+    </ol>
+    <p>When your device requests an image or opens a website, that third-party service receives standard technical information (such as your device's IP address) needed to serve the request. This is handled under <strong>those services' own privacy policies</strong>, not by KiwiScribe, and we do not receive any of that information.</p>
+
+    <h2>Data we collect: none</h2>
+    <p>We do not collect, store, share, or sell any personal data. There is no tracking, profiling, or advertising.</p>
+
+    <h2>Children</h2>
+    <p>KiwiScribe does not collect data from anyone, including children.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the updated version will be posted on this page with a new "Last updated" date.</p>
+
+    <h2>Contact</h2>
+    <div class="contact-box">
+      <p>Questions about privacy? Contact: <a href="mailto:annamareemorris@icloud.com"><strong>annamareemorris@icloud.com</strong></a></p>
+    </div>
+
+  </article>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div>KiwiScribe — NZ Books · Made in Aotearoa New Zealand 🇳🇿</div>
+    <div class="foot-links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="mailto:annamareemorris@gmail.com">Contact</a>
+    </div>
+    <div class="copy">© <span id="year">2026</span> KiwiScribe. Book data from the National Library of New Zealand. Not affiliated with any bookshop or publisher.</div>
+  </div>
+</footer>
+
+<script>
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 12); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
